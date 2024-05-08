@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """docs"""
 
-import base_caching
+BaseCaching = __import__("base_caching").BaseCaching
 
 
-class BasicCache(base_caching.BaseCaching):
+class BasicCache(BaseCaching):
     """ class """
     def put(self, key, item):
         """put item in cache"""
