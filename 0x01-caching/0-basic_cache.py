@@ -1,16 +1,16 @@
-#!/usr/bin/env python3
-"""docs"""
-
+#!/usr/bin/python3
+""" doc doc doc """
 BaseCaching = __import__("base_caching").BaseCaching
 
 
 class BasicCache(BaseCaching):
-    """ class """
+    """doc doc doc"""
+
     def put(self, key, item):
-        """put item in cache"""
+        """doc doc doc"""
         if key and item:
             self.cache_data[key] = item
 
     def get(self, key):
-        """get item from cache"""
+        """doc doc doc"""
         return self.cache_data.get(key)
