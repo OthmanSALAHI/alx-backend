@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-"""doc doc doc"""
+"""
+Flask app
+"""
 from flask import Flask, render_template
+
 
 app = Flask(__name__)
 
 
-@app.route("/")
-def index():
-    """doc doc doc"""
-    return render_template("0-index.html")
+@app.route('/', strict_slashes=False)
+def index() -> str:
+    """
+    Handles / route
+    """
+    return render_template('0-index.html')
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(port="5000", host="0.0.0.0", debug=True)

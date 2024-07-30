@@ -1,29 +1,43 @@
-#!/usr/bin/python3
-""" doc doc doc """
-BaseCaching = __import__("base_caching").BaseCaching
+#!/usr/bin/env python3
+""" BaseCaching module
+"""
+from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
-    """doc doc doc"""
-
+    """
+    FIFOCache defines a FIFO caching system
+    """
     def __init__(self):
-        """doc doc doc"""
+        """
+        Initialize the class with the parent's init method
+        """
         super().__init__()
-        self.order = []
+        self.usage = []
 
     def put(self, key, item):
-        """doc doc doc"""
-        if key and item:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                removed = self.order.pop(0)
-                self.cache_data.pop(removed)
-                print("DISCARD: {}".format(removed))
+        """
+        Cache a key-value pair
+        """
+        if key is None or item is None:
+            pass
+        else:
+            length = len(self.cache_data)
+            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                print("DISCARD: {}".format(self.usage[0]))
+                del self.cache_data[self.usage[0]]
+                del self.usage[0]
+            if key in self.usage:
+                del self.usage[self.usage.index(key)]
+            self.usage.append(key)
             self.cache_data[key] = item
-            self.order.append(key)
 
     def get(self, key):
-        """doc doc doc"""
-        if key in self.cache_data:
-            self.order.remove(key)
-            self.order.append(key)
-            return self.cache_data.get(key)
+        """
+        Return the value linked to a given key, or None
+        """
+        if key is not None and key in self.cache_data.keys():
+            del self.usage[self.usage.index(key)]
+            self.usage.append(key)
+            return self.cache_data[key]
+        return None
